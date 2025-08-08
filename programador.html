@@ -3,6 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CV profesional de Mariano Monje Isleño - Técnico Superior en Desarrollo de Software. Experiencia en desarrollo full-stack y marketing digital.">
+    <meta name="keywords" content="CV programador, desarrollador full-stack, mariano monje, curriculum vitae, técnico desarrollo software, marketing digital">
+    <meta name="author" content="Mariano Monje Isleño">
+    <meta property="og:title" content="CV - Mariano Monje Isleño">
+    <meta property="og:description" content="CV profesional de desarrollador full-stack con experiencia en tecnologías modernas y marketing digital.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://marianomonjetecnico2023.github.io/Portfolio/programador.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="CV - Mariano Monje Isleño">
+    <meta name="twitter:description" content="CV profesional de desarrollador full-stack con experiencia en tecnologías modernas.">
     <title>Curriculum - Mariano Monje Isleño</title>
     <link rel="stylesheet" href="index.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -15,30 +25,83 @@
 <body>
     <header class="hero">
         <nav id="main-nav" class="container">
+            <button class="mobile-menu-toggle" aria-label="Abrir menú">
+                <i class="fas fa-bars"></i>
+            </button>
             <ul>
                 <li><a href="index.html">Inicio</a></li>
                 <li><a href="ProyectosProgramacion.html">Proyectos</a></li>
                 <li><a href="DiseñoGrafico.html">Diseño</a></li>
+                <li><a href="IA-Generativa.html">IA Generativa</a></li>
                 <li><a href="programador.html">CV</a></li>
                 <li><a href="ExperienciaLaboral.html">Experiencia</a></li>
-                <li><a href="CarrerasPlatzi.html">Formación</a></li>
+                <li><a href="CarrerasPlatzi.html">Desarrollo Profesional</a></li>
                 <li><a href="Referencias.html">Referencias</a></li>
             </ul>
         </nav>
+        <div class="mobile-menu-overlay"></div>
 
         <div class="hero-content container">
             <h1>Curriculum Vitae</h1>
             <p class="subtitle">Mi trayectoria profesional y habilidades técnicas</p>
         </div>
     </header>
-    <h2>Resumen Profesional</h2>
-    <p id="carta">
-        Técnico Superior en Desarrollo de Software con sólida formación en programación, diseño web y experiencia en
-        diversas áreas tecnológicas. Apasionado por el aprendizaje continuo y la aplicación de nuevas tecnologías.
-        Experiencia en gestión de comunidades online, reparación de computadoras y enseñanza de programación. Busco
-        aplicar mis habilidades y conocimientos en un entorno desafiante y orientado al crecimiento.
-    </p>
-</section>
+    <main class="container">
+        <section class="section professional-summary">
+            <h2>Perfil Profesional</h2>
+            <div class="summary-content">
+                <div class="summary-text">
+                    <p class="lead-summary">
+                        <strong>Desarrollador Full-Stack Junior</strong> con experiencia práctica en Node.js, JavaScript, MongoDB y tecnologías cloud. 
+                        Especializado en crear aplicaciones web escalables con arquitecturas modernas y mejores prácticas de seguridad.
+                    </p>
+                    <div class="key-achievements">
+                        <div class="achievement-item">
+                            <i class="fas fa-trophy"></i>
+                            <span>Aplicaciones desplegadas en producción</span>
+                        </div>
+                        <div class="achievement-item">
+                            <i class="fas fa-users"></i>
+                            <span>Aumento de 1,400% en tráfico web como Community Manager</span>
+                        </div>
+                        <div class="achievement-item">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>25+ Certificaciones profesionales completadas</span>
+                        </div>
+                        <div class="achievement-item">
+                            <i class="fas fa-code"></i>
+                            <span>1 proyecto full-stack completo desplegado en producción</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section quality-commitment">
+            <h2>Compromiso de Calidad</h2>
+            <div class="commitment-grid">
+                <div class="commitment-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <h4>Seguridad</h4>
+                    <p>Implementación de mejores prácticas de seguridad en todas las aplicaciones</p>
+                </div>
+                <div class="commitment-item">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <h4>Rendimiento</h4>
+                    <p>Optimización de aplicaciones para máxima velocidad y eficiencia</p>
+                </div>
+                <div class="commitment-item">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h4>Responsive</h4>
+                    <p>Diseño adaptativo que funciona perfectamente en todos los dispositivos</p>
+                </div>
+                <div class="commitment-item">
+                    <i class="fas fa-code-branch"></i>
+                    <h4>Código Limpio</h4>
+                    <p>Desarrollo con estándares de calidad y documentación clara</p>
+                </div>
+            </div>
+        </section>
 
 <section id="educacion">
     <h2>Educación</h2>
@@ -52,14 +115,14 @@
 </section>
 
 <section id="formacion">
-    <h2>Formación Complementaria</h2>
+    <h2>Educación y Certificaciones</h2>
     <ul>
-        <li>Platzi: Amplio abanico de cursos y carreras en desarrollo web, diseño, marketing, blockchain, finanzas y
+        <li><strong>Platzi:</strong> Amplio abanico de cursos y carreras en desarrollo web, diseño, marketing, blockchain, finanzas y
             más. (Listado completo disponible bajo solicitud).</li>
-        <li>ISEC: Diseño de páginas web, Reparación de PC, Diseño gráfico básico (2012/2013).</li>
-        <li>Ciclo de Actualización Pedagógica: "Si quieres que tus alumnos aprendan, deja de enseñar." (Certificado
+        <li><strong>ISEC:</strong> Diseño de páginas web, Reparación de PC, Diseño gráfico básico (2012/2013).</li>
+        <li><strong>Ciclo de Actualización Pedagógica:</strong> "Si quieres que tus alumnos aprendan, deja de enseñar." (Certificado
             de asistencia)</li>
-        <li>Taller de Escritura Académica impartido por Laura Lewin (Certificado de asistencia)</li>
+        <li><strong>Taller de Escritura Académica:</strong> Impartido por Laura Lewin (Certificado de asistencia)</li>
     </ul>
 </section>
 
@@ -153,13 +216,83 @@
         </div>
     </footer>
 
-    <div class="nav-buttons">
-        <a href="javascript:history.back()" class="nav-button" title="Página Anterior">
-            <i class="fas fa-arrow-left"></i>
-        </a>
-        <a href="index.html" class="nav-button" title="Inicio">
-            <i class="fas fa-home"></i>
-        </a>
-    </div>
-</body>
-</html>
+            <div class="nav-buttons">
+            <a href="javascript:history.back()" class="nav-button" title="Página Anterior">
+                <i class="fas fa-arrow-left"></i>
+            </a>
+            <a href="index.html" class="nav-button" title="Inicio">
+                <i class="fas fa-home"></i>
+            </a>
+        </div>
+
+        <script>
+            // Menú móvil
+            const mobileToggle = document.querySelector('.mobile-menu-toggle');
+            const navMenu = document.querySelector('#main-nav ul');
+            const overlay = document.querySelector('.mobile-menu-overlay');
+            const menuIcon = mobileToggle.querySelector('i');
+
+            function toggleMobileMenu() {
+                navMenu.classList.toggle('mobile-menu-open');
+                overlay.classList.toggle('active');
+                
+                // Cambiar icono
+                if (navMenu.classList.contains('mobile-menu-open')) {
+                    menuIcon.classList.remove('fa-bars');
+                    menuIcon.classList.add('fa-times');
+                    mobileToggle.setAttribute('aria-label', 'Cerrar menú');
+                } else {
+                    menuIcon.classList.remove('fa-times');
+                    menuIcon.classList.add('fa-bars');
+                    mobileToggle.setAttribute('aria-label', 'Abrir menú');
+                }
+            }
+
+            mobileToggle.addEventListener('click', toggleMobileMenu);
+            overlay.addEventListener('click', toggleMobileMenu);
+
+            // Cerrar menú al hacer clic en un enlace
+            navMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (navMenu.classList.contains('mobile-menu-open')) {
+                        toggleMobileMenu();
+                    }
+                });
+            });
+
+            // Estados de carga para imágenes y videos
+            function handleMediaLoading() {
+                const images = document.querySelectorAll('img');
+                const videos = document.querySelectorAll('video');
+
+                images.forEach(img => {
+                    if (!img.complete) {
+                        img.parentElement.classList.add('loading');
+                        img.addEventListener('load', () => {
+                            img.parentElement.classList.remove('loading');
+                        });
+                        img.addEventListener('error', () => {
+                            img.parentElement.classList.remove('loading');
+                            img.style.display = 'none';
+                        });
+                    }
+                });
+
+                videos.forEach(video => {
+                    video.addEventListener('loadstart', () => {
+                        video.parentElement.classList.add('loading');
+                    });
+                    video.addEventListener('canplay', () => {
+                        video.parentElement.classList.remove('loading');
+                    });
+                    video.addEventListener('error', () => {
+                        video.parentElement.classList.remove('loading');
+                    });
+                });
+            }
+
+            // Ejecutar cuando el DOM esté listo
+            document.addEventListener('DOMContentLoaded', handleMediaLoading);
+        </script>
+    </body>
+    </html>

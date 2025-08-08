@@ -3,6 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Experiencia laboral de Mariano Monje Isleño - Scrum Master, Project Management Specialist y desarrollador full-stack con proyectos reales desplegados.">
+    <meta name="keywords" content="experiencia laboral, scrum master, project management, desarrollador full-stack, mariano monje, portfolio profesional">
+    <meta name="author" content="Mariano Monje Isleño">
+    <meta property="og:title" content="Experiencia Laboral - Mariano Monje Isleño">
+    <meta property="og:description" content="Experiencia laboral en gestión de proyectos, desarrollo de software y liderazgo de equipos.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://marianomonjetecnico2023.github.io/Portfolio/ExperienciaLaboral.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Experiencia Laboral - Mariano Monje Isleño">
+    <meta name="twitter:description" content="Experiencia laboral en gestión de proyectos y desarrollo de software.">
     <title>Experiencia Laboral - Mariano Monje Isleño</title>
     <link rel="stylesheet" href="index.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -10,16 +20,21 @@
 <body>
     <header class="hero">
         <nav id="main-nav" class="container">
+            <button class="mobile-menu-toggle" aria-label="Abrir menú">
+                <i class="fas fa-bars"></i>
+            </button>
             <ul>
                 <li><a href="index.html">Inicio</a></li>
                 <li><a href="ProyectosProgramacion.html">Proyectos</a></li>
                 <li><a href="DiseñoGrafico.html">Diseño</a></li>
+                <li><a href="IA-Generativa.html">IA Generativa</a></li>
                 <li><a href="programador.html">CV</a></li>
                 <li><a href="ExperienciaLaboral.html">Experiencia</a></li>
                 <li><a href="CarrerasPlatzi.html">Desarrollo Profesional</a></li>
                 <li><a href="Referencias.html">Referencias</a></li>
             </ul>
         </nav>
+        <div class="mobile-menu-overlay"></div>
 
         <div class="hero-content container">
             <h1>Experiencia Laboral</h1>
@@ -42,12 +57,12 @@
                         </div>
                         <h4>Protecc Instituto</h4>
                         <div class="timeline-description">
-                            <p>Gestión estratégica de redes sociales y creación de contenido digital para aumentar la visibilidad y engagement del instituto.</p>
+                            <p>Gestión estratégica de redes sociales y creación de contenido digital para aumentar la visibilidad y engagement del instituto. Experiencia en herramientas digitales y análisis de métricas web.</p>
                             <div class="achievements">
                                 <h5><i class="fas fa-trophy"></i> Logros Destacados</h5>
                                 <ul>
-                                    <li>Incremento de visitas web de 1,000 a más de 150,000 mensuales</li>
-                                    <li>Aumento de alumnos por curso de 5 a 40 estudiantes</li>
+                                    <li>Incremento de visitas web de 1,000 a 15,000 mensuales</li>
+                                    <li>Aumento de alumnos por curso de 5 a 35 estudiantes</li>
                                     <li>Desarrollo e implementación de estrategia de contenido multiplataforma</li>
                                 </ul>
                             </div>
@@ -158,13 +173,83 @@
         </div>
     </footer>
 
-    <div class="nav-buttons">
-        <a href="javascript:history.back()" class="nav-button" title="Página Anterior">
-            <i class="fas fa-arrow-left"></i>
-        </a>
-        <a href="index.html" class="nav-button" title="Inicio">
-            <i class="fas fa-home"></i>
-        </a>
-    </div>
-</body>
-</html>
+            <div class="nav-buttons">
+            <a href="javascript:history.back()" class="nav-button" title="Página Anterior">
+                <i class="fas fa-arrow-left"></i>
+            </a>
+            <a href="index.html" class="nav-button" title="Inicio">
+                <i class="fas fa-home"></i>
+            </a>
+        </div>
+
+        <script>
+            // Menú móvil
+            const mobileToggle = document.querySelector('.mobile-menu-toggle');
+            const navMenu = document.querySelector('#main-nav ul');
+            const overlay = document.querySelector('.mobile-menu-overlay');
+            const menuIcon = mobileToggle.querySelector('i');
+
+            function toggleMobileMenu() {
+                navMenu.classList.toggle('mobile-menu-open');
+                overlay.classList.toggle('active');
+                
+                // Cambiar icono
+                if (navMenu.classList.contains('mobile-menu-open')) {
+                    menuIcon.classList.remove('fa-bars');
+                    menuIcon.classList.add('fa-times');
+                    mobileToggle.setAttribute('aria-label', 'Cerrar menú');
+                } else {
+                    menuIcon.classList.remove('fa-times');
+                    menuIcon.classList.add('fa-bars');
+                    mobileToggle.setAttribute('aria-label', 'Abrir menú');
+                }
+            }
+
+            mobileToggle.addEventListener('click', toggleMobileMenu);
+            overlay.addEventListener('click', toggleMobileMenu);
+
+            // Cerrar menú al hacer clic en un enlace
+            navMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (navMenu.classList.contains('mobile-menu-open')) {
+                        toggleMobileMenu();
+                    }
+                });
+            });
+
+            // Estados de carga para imágenes y videos
+            function handleMediaLoading() {
+                const images = document.querySelectorAll('img');
+                const videos = document.querySelectorAll('video');
+
+                images.forEach(img => {
+                    if (!img.complete) {
+                        img.parentElement.classList.add('loading');
+                        img.addEventListener('load', () => {
+                            img.parentElement.classList.remove('loading');
+                        });
+                        img.addEventListener('error', () => {
+                            img.parentElement.classList.remove('loading');
+                            img.style.display = 'none';
+                        });
+                    }
+                });
+
+                videos.forEach(video => {
+                    video.addEventListener('loadstart', () => {
+                        video.parentElement.classList.add('loading');
+                    });
+                    video.addEventListener('canplay', () => {
+                        video.parentElement.classList.remove('loading');
+                    });
+                    video.addEventListener('error', () => {
+                        video.parentElement.classList.remove('loading');
+                    });
+                });
+            }
+
+            // Ejecutar cuando el DOM esté listo
+            document.addEventListener('DOMContentLoaded', handleMediaLoading);
+        </script>
+    </body>
+    </html>
