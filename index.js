@@ -1,5 +1,5 @@
 // ========================================
-// PORTFOLIO JAVASCRIPT - FUNCIONALIDADES CENTRALIZADAS
+// PORTFOLIO JAVASCRIPT - FUNCIONALIDADES
 // ========================================
 
 // Menú móvil
@@ -7,31 +7,31 @@ function initMobileMenu() {
     const mobileToggle = document.querySelector('.mobile-menu-toggle');
     const navMenu = document.querySelector('#main-nav ul');
     const overlay = document.querySelector('.mobile-menu-overlay');
-    
+
     if (!mobileToggle || !navMenu || !overlay) return;
-    
+
     const menuIcon = mobileToggle.querySelector('i');
 
     function toggleMobileMenu() {
-        navMenu.classList.toggle('mobile-menu-open');
-        overlay.classList.toggle('active');
-        
-        // Cambiar icono
-        if (navMenu.classList.contains('mobile-menu-open')) {
-            menuIcon.classList.remove('fa-bars');
-            menuIcon.classList.add('fa-times');
-            mobileToggle.setAttribute('aria-label', 'Cerrar menú');
+        const isOpen = navMenu.classList.toggle('mobile-menu-open');
+        overlay.classList.toggle('mobile-menu-open', isOpen);
+
+        if (menuIcon) {
+            menuIcon.classList.toggle('fa-bars', !isOpen);
+            menuIcon.classList.toggle('fa-times', isOpen);
+        }
+
+        if (isOpen) {
+            document.body.style.overflow = 'hidden';
         } else {
-            menuIcon.classList.remove('fa-times');
-            menuIcon.classList.add('fa-bars');
-            mobileToggle.setAttribute('aria-label', 'Abrir menú');
+            document.body.style.overflow = '';
         }
     }
 
     mobileToggle.addEventListener('click', toggleMobileMenu);
     overlay.addEventListener('click', toggleMobileMenu);
 
-    // Cerrar menú al hacer clic en un enlace
+    // Cerrar al hacer click en un enlace del menú
     navMenu.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', () => {
             if (navMenu.classList.contains('mobile-menu-open')) {
@@ -41,24 +41,27 @@ function initMobileMenu() {
     });
 }
 
-// Filtrado de proyectos
-function initProjectFilters() {
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    const projectCards = document.querySelectorAll('.project-card');
-    
-    if (filterButtons.length === 0 || projectCards.length === 0) return;
+// Utilidad genérica para filtros (proyectos, diseño, IA)
+function initFilterGroup(filterContainerSelector, cardSelector) {
+    const filterContainer = document.querySelector(filterContainerSelector);
+    const cards = document.querySelectorAll(cardSelector);
 
-    filterButtons.forEach(button => {
+    if (!filterContainer || cards.length === 0) return;
+
+    const buttons = filterContainer.querySelectorAll('.filter-btn');
+    if (buttons.length === 0) return;
+
+    buttons.forEach(button => {
         button.addEventListener('click', () => {
             const filter = button.dataset.filter;
-            
-            filterButtons.forEach(btn => btn.classList.remove('active'));
+
+            buttons.forEach(btn => btn.classList.remove('active'));
             button.classList.add('active');
 
-            projectCards.forEach(card => {
-                const categories = card.dataset.category.split(' ');
+            cards.forEach(card => {
+                const categories = (card.dataset.category || '').split(' ');
                 if (filter === 'todos' || categories.includes(filter)) {
-                    card.style.display = 'block';
+                    card.style.display = '';
                 } else {
                     card.style.display = 'none';
                 }
@@ -67,202 +70,164 @@ function initProjectFilters() {
     });
 }
 
-// Filtrado de diseño gráfico
-function initDesignFilters() {
-    const filterButtons = document.querySelectorAll('.design-filters .filter-btn');
-    const designCards = document.querySelectorAll('.design-card');
-    
-    if (filterButtons.length === 0 || designCards.length === 0) return;
+// Inicializar grupos de filtros específicos
+function initFilters() {
+    // Proyectos de programación
+    initFilterGroup('.project-filters', '.project-card');
 
-    filterButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const filter = button.dataset.filter;
-            
-            filterButtons.forEach(btn => btn.classList.remove('active'));
-            button.classList.add('active');
+    // Diseño gráfico
+    initFilterGroup('.design-filters', '.design-card');
 
-            designCards.forEach(card => {
-                const categories = card.dataset.category.split(' ');
-                if (filter === 'todos' || categories.includes(filter)) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        });
-    });
+    // IA generativa / Videos IA
+    initFilterGroup('.ai-filters', '.ai-card');
 }
 
-// Filtrado de IA Generativa
-function initAIFilters() {
-    const filterButtons = document.querySelectorAll('.ai-filters .filter-btn');
-    const aiCards = document.querySelectorAll('.ai-card');
-    
-    if (filterButtons.length === 0 || aiCards.length === 0) return;
-
-    filterButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const filter = button.dataset.filter;
-            
-            filterButtons.forEach(btn => btn.classList.remove('active'));
-            button.classList.add('active');
-
-            aiCards.forEach(card => {
-                const categories = card.dataset.category.split(' ');
-                if (filter === 'todos' || categories.includes(filter)) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        });
-    });
-}
-
-// Estados de carga para imágenes y videos
-function initMediaLoading() {
-    const images = document.querySelectorAll('img');
-    const videos = document.querySelectorAll('video');
-
-    images.forEach(img => {
-        if (!img.complete) {
-            img.parentElement.classList.add('loading');
-            img.addEventListener('load', () => {
-                img.parentElement.classList.remove('loading');
-            });
-            img.addEventListener('error', () => {
-                img.parentElement.classList.remove('loading');
-                img.style.display = 'none';
-            });
-        }
-    });
-
-    videos.forEach(video => {
-        video.addEventListener('loadstart', () => {
-            video.parentElement.classList.add('loading');
-        });
-        video.addEventListener('canplay', () => {
-            video.parentElement.classList.remove('loading');
-        });
-        video.addEventListener('error', () => {
-            video.parentElement.classList.remove('loading');
-        });
-    });
-}
-
-// Animaciones de entrada
+// Animaciones de entrada simples con IntersectionObserver
 function initAnimations() {
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
+    const elements = document.querySelectorAll(
+        '.section, .project-card, .design-card, .ai-card, .timeline-item'
+    );
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    }, observerOptions);
+    if (elements.length === 0 || !('IntersectionObserver' in window)) return;
 
-    // Observar elementos que necesitan animación
-    const animatedElements = document.querySelectorAll('.project-card, .design-card, .ai-card, .testimonial-card, .timeline-item');
-    animatedElements.forEach(el => {
+    elements.forEach(el => {
         el.style.opacity = '0';
-        el.style.transform = 'translateY(20px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(el);
+        el.style.transform = 'translateY(12px)';
+        el.style.transition = 'opacity 0.35s ease, transform 0.35s ease';
     });
+
+    const observer = new IntersectionObserver(
+        entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                    observer.unobserve(entry.target);
+                }
+            });
+        },
+        {
+            threshold: 0.12,
+            rootMargin: '0px 0px -40px 0px'
+        }
+    );
+
+    elements.forEach(el => observer.observe(el));
 }
 
-// Smooth scroll para enlaces internos
+// Smooth scroll para enlaces internos (por si los usás)
 function initSmoothScroll() {
     const internalLinks = document.querySelectorAll('a[href^="#"]');
-    
+
     internalLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
+        link.addEventListener('click', event => {
             const targetId = link.getAttribute('href').substring(1);
-            const targetElement = document.getElementById(targetId);
-            
-            if (targetElement) {
-                targetElement.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
+            const target = document.getElementById(targetId);
+
+            if (target) {
+                event.preventDefault();
+                window.scrollTo({
+                    top: target.offsetTop - 80,
+                    behavior: 'smooth'
                 });
             }
         });
     });
 }
 
-// Lazy loading para imágenes
-function initLazyLoading() {
-    if ('IntersectionObserver' in window) {
-        const imageObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    img.src = img.dataset.src;
-                    img.classList.remove('lazy');
-                    imageObserver.unobserve(img);
-                }
+// Carga visual de imágenes / videos con clase .loading (opcional)
+function initMediaLoading() {
+    const mediaContainers = document.querySelectorAll('.project-media, .design-image, .ai-image');
+
+    mediaContainers.forEach(container => {
+        const img = container.querySelector('img');
+        const video = container.querySelector('video');
+
+        if (img) {
+            img.addEventListener('load', () => {
+                container.classList.remove('loading');
             });
-        });
+            img.addEventListener('error', () => {
+                container.classList.remove('loading');
+            });
+        }
 
-        const lazyImages = document.querySelectorAll('img[data-src]');
-        lazyImages.forEach(img => imageObserver.observe(img));
-    }
-}
-
-// Tooltips para elementos interactivos
-function initTooltips() {
-    const tooltipElements = document.querySelectorAll('[title]');
-    
-    tooltipElements.forEach(element => {
-        element.addEventListener('mouseenter', (e) => {
-            const tooltip = document.createElement('div');
-            tooltip.className = 'tooltip';
-            tooltip.textContent = e.target.title;
-            tooltip.style.cssText = `
-                position: absolute;
-                background: rgba(0, 0, 0, 0.8);
-                color: white;
-                padding: 5px 10px;
-                border-radius: 4px;
-                font-size: 12px;
-                z-index: 1000;
-                pointer-events: none;
-                white-space: nowrap;
-            `;
-            
-            document.body.appendChild(tooltip);
-            
-            const rect = e.target.getBoundingClientRect();
-            tooltip.style.left = rect.left + (rect.width / 2) - (tooltip.offsetWidth / 2) + 'px';
-            tooltip.style.top = rect.top - tooltip.offsetHeight - 5 + 'px';
-            
-            e.target.addEventListener('mouseleave', () => {
-                tooltip.remove();
-            }, { once: true });
-        });
+        if (video) {
+            video.addEventListener('loadeddata', () => {
+                container.classList.remove('loading');
+            });
+            video.addEventListener('error', () => {
+                container.classList.remove('loading');
+            });
+        }
     });
 }
 
-// Función principal de inicialización
+// Tooltips básicos con atributo data-tooltip (por si los usás)
+function initTooltips() {
+    const tooltipElements = document.querySelectorAll('[data-tooltip]');
+
+    if (tooltipElements.length === 0) return;
+
+    let tooltipDiv = document.createElement('div');
+    tooltipDiv.className = 'tooltip';
+    tooltipDiv.style.position = 'fixed';
+    tooltipDiv.style.zIndex = '9999';
+    tooltipDiv.style.pointerEvents = 'none';
+    tooltipDiv.style.background = 'rgba(15, 23, 42, 0.96)';
+    tooltipDiv.style.color = '#e5e7eb';
+    tooltipDiv.style.fontSize = '0.75rem';
+    tooltipDiv.style.padding = '0.25rem 0.6rem';
+    tooltipDiv.style.borderRadius = '999px';
+    tooltipDiv.style.opacity = '0';
+    tooltipDiv.style.transform = 'translateY(4px)';
+    tooltipDiv.style.transition = 'opacity 0.15s ease, transform 0.15s ease';
+
+    document.body.appendChild(tooltipDiv);
+
+    tooltipElements.forEach(el => {
+        el.addEventListener('mouseenter', e => {
+            const text = el.getAttribute('data-tooltip');
+            if (!text) return;
+            tooltipDiv.textContent = text;
+            tooltipDiv.style.opacity = '1';
+            tooltipDiv.style.transform = 'translateY(0)';
+            positionTooltip(e);
+        });
+
+        el.addEventListener('mousemove', positionTooltip);
+
+        el.addEventListener('mouseleave', () => {
+            tooltipDiv.style.opacity = '0';
+            tooltipDiv.style.transform = 'translateY(4px)';
+        });
+    });
+
+    function positionTooltip(e) {
+        const padding = 10;
+        const rect = tooltipDiv.getBoundingClientRect();
+        let x = e.clientX + padding;
+        let y = e.clientY + padding;
+
+        if (x + rect.width > window.innerWidth) {
+            x = e.clientX - rect.width - padding;
+        }
+        if (y + rect.height > window.innerHeight) {
+            y = e.clientY - rect.height - padding;
+        }
+
+        tooltipDiv.style.left = `${x}px`;
+        tooltipDiv.style.top = `${y}px`;
+    }
+}
+
+// Inicializador general
 function initPortfolio() {
-    // Inicializar todas las funcionalidades
     initMobileMenu();
-    initProjectFilters();
-    initDesignFilters();
-    initAIFilters();
-    initMediaLoading();
+    initFilters();
     initAnimations();
     initSmoothScroll();
-    initLazyLoading();
-    initTooltips();
-    
-    console.log('Portfolio JavaScript inicializado correctamente');
+    initMediaLoading();
 }
 
 // Ejecutar cuando el DOM esté listo
