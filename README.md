@@ -6,7 +6,7 @@ Desarrollador Full-Stack Junior especializado en la creación de aplicaciones we
 
 ## 🌐 Portfolio online
 
-👉 https://marianomonjetecnico2023.github.io/
+👉 https://marianomonjetecnico2023.github.io/portafolio/
 
 ---
 
